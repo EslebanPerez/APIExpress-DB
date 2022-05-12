@@ -61,6 +61,18 @@ app.get("/explorers2/:id", async (req, res) => {
     const allExplorers = await prisma.explorer2.findUnique({where: {id: parseInt(id)}});
     res.json(allExplorers);
 });
+app.post("/explorers2", async(req, res) =>{
+    const explorer2={
+        name : req.body.name,
+        lang : req.body.lang,
+        missionComander : req.body.missionComander,
+        enrollments : req.body.enrollments,
+        hasCertification: req.body.hasCertification
+    };
+    const message = "Explorer Creado";
+    await prisma.explorer2.create({data:explorer2});
+    return res.json({message});
+});
 app.listen(port, () =>{
     console.log(`Listening to request on port ${port}`);
 });
