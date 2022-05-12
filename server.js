@@ -47,6 +47,16 @@ app.delete("/explorers/:id", async(req, res)=>{
     await prisma.explorer.delete({where: {id: id}});
     return res.json({mesage: "Eliminado correctamente"});
 });
+app.get("/explorers", async (req, res) => {
+    const allExplorers =  await prisma.explorer.findMany({});
+    res.json(allExplorers);
+});
+
+app.get("/explorers2", async  (req, res) =>{
+    const allExplorers = await prisma.explorer2.findMany({});
+    res.json(allExplorers);
+});
+
 app.listen(port, () =>{
     console.log(`Listening to request on port ${port}`);
 });
