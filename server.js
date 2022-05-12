@@ -56,7 +56,11 @@ app.get("/explorers2", async  (req, res) =>{
     const allExplorers = await prisma.explorer2.findMany({});
     res.json(allExplorers);
 });
-
+app.get("/explorers2/:id", async (req, res) => {
+    const id= req.params.id;
+    const allExplorers = await prisma.explorer2.findUnique({where: {id: parseInt(id)}});
+    res.json(allExplorers);
+});
 app.listen(port, () =>{
     console.log(`Listening to request on port ${port}`);
 });
